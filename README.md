@@ -5,7 +5,7 @@ A library which make it easier for you to manipulate array just like sql stateme
 ## Install
 
 ```bash
-npm install
+npm install crud
 ```
 
 ## Usage example
@@ -21,23 +21,29 @@ var pred = {name: {
 select(cols).from(kids).sortBy(sortCol).where(pred); // [{name: 'Abby', age: 7}]
 ```
 ## API
-select:
+- `.select(cols)`: 
+Returns the chain, so you can call the from at once; e.g: select(...).from(...)
 
-update:
+- `update(table):
+Returns the chain, so you can call the set at once; e.g: update(...).set(...)
 
-delete:
+- `delete(table):
+Returns the chain, so you can call the where at once; e.g: delete(...).where(...)
 
-insert:
+- `insert(table):
+Returns the chain, so you can call the values at once; e.g: insert(...).values(...)
 
-from:
+- `from(table):
+Returns the result
 
-where:
+- `where(pred):
+Returns the filterd result
 
-sortBy:
+- `sortBy(cols):
 
-and:
+- `and(pred):
 
-or:
+- `or(pred):
 
 ## Contributing
 
