@@ -1,0 +1,25 @@
+{
+  "name": "crud",
+  "version": "0.1.0",
+  "description": "A library which make it easier for you to manipulate array just like sql statement to table.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/azl397985856/CRUD.git"
+  },
+  "keywords": [
+    "crud",
+    "sql",
+    "javacript",
+    "functional"
+  ],
+  "author": "zhipenglu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/azl397985856/CRUD/issues"
+  },
+  "homepage": "https://github.com/azl397985856/CRUD#readme"
+}
