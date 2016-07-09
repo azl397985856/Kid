@@ -24,26 +24,26 @@ select(cols).from(kids).sortBy(sortCol).where(pred); // [{name: 'Abby', age: 7}]
 - `.select(cols)`: 
 Returns the chain, so you can call the from at once; e.g: select(...).from(...)
 
-- `update(table):
+- `.update(table):
 Returns the chain, so you can call the set at once; e.g: update(...).set(...)
 
-- `delete(table):
+- `.delete(table):
 Returns the chain, so you can call the where at once; e.g: delete(...).where(...)
 
-- `insert(table):
+- `.insert(table):
 Returns the chain, so you can call the values at once; e.g: insert(...).values(...)
 
-- `from(table):
+- `.from(table):
 Returns the result
 
-- `where(pred):
+- `.where(pred):
 Returns the filterd result
 
-- `sortBy(cols):
+- `.sortBy(cols):
 
-- `and(pred):
+- `.and(pred):
 
-- `or(pred):
+- `.or(pred):
 
 ## Contributing
 
