@@ -1,19 +1,24 @@
 import R from "ramda";
-import { from, where, and, or } from "common";
+import { from, where, and, or, done } from "../common";
 
 let curry = null;
 let all = null;
-// var abby = {name: 'Abby', age: 7, hair: 'blond', grade: 2};
-// var fred = {name: 'Fred', age: 12, hair: 'brown', grade: 7};
-// var kids = [abby, fred];
-// var cols = ['name', 'grade'];
-// var sortCol = 'name';
-// var pred = {name: {
-//	eq: Abby,
-//}}
-// select(cols).from(kids).sortBy(sortCol).where().or().and().exe();
+let filtered = null;
+
 const isString = R.is(String);
-const isArray = (type)=> R.type(type) === "Array"
+const isArray = (type)=> R.type(type) === "Array";
+const filterFuncs = {
+	eq: R.whereEq,
+	gt: (keyValue) => {
+		const key = R.head(Object.keys(keyValue));
+		const value = keyValue[key];
+		R.gt(R.prop(key),value)
+	},
+}
+function getByComparator(comparator) {
+	return filterFuncs[comparator];
+}
+
 const wrapper  = {
 	select: function(cols) {
 		const _type = R.type(cols)
@@ -22,7 +27,7 @@ const wrapper  = {
 			return -1;
 		}
 		curry = R.project(cols);
-		return this;
+		return wrapper;
 	},
 	from: function(table) {
 		const _type = R.type(table)
@@ -35,7 +40,7 @@ const wrapper  = {
 			return -1;
 		}
 		all = curry(table);
-		return this;
+		return wrapper;
 	},
 	// only support string now
 	sortBy: function(sortCol) {
@@ -49,16 +54,17 @@ const wrapper  = {
 			return -1;
 		}
 		R.sortBy(R.compose(R.prop(sortCol)))(all);
-		return this;
+		return wrapper;
 	},
 	where: function(conditions) {
-		var pred = R.where({
-			and: R.and,
-			neq: R.complement(R.T()),
-			gt: R.gt(_, 10),
-			lt: R.lt(_, 20)
-		});
+		const comparator = R.head(Object.keys(conditions));
+		const keyValue = R.head(Object.keys(conditions).map(comparator => conditions[comparator]));
+		filtered = R.filter(getByComparator(comparator)(keyValue), all);
+		return wrapper;
+	},
+	done: function() {
+		return R.type(filtered) === 'Null' ? all : filtered;
 	}
 }
-module.export = wrapper;
-module.default = wrapper.select
+module.exports = wrapper.select;
+exports.default = wrapper.select;

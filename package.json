@@ -4,7 +4,9 @@
   "description": "A library which make it easier for you to manipulate array just like sql statement to table.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -rf lib",
+    "test": "mocha test/**/*.spec.js --compilers js:babel-core/register",
+    "build": "npm run clean && babel ./src -d lib"
   },
   "repository": {
     "type": "git",
@@ -21,5 +23,13 @@
   "bugs": {
     "url": "https://github.com/azl397985856/CRUD/issues"
   },
-  "homepage": "https://github.com/azl397985856/CRUD#readme"
+  "homepage": "https://github.com/azl397985856/CRUD#readme",
+  "dependencies": {
+    "ramda": "^0.21.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.10.4",
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
 }
