@@ -18,6 +18,11 @@ const filterFuncs = {
 		return (payload) => R.gt(R.prop(key, payload),value)
 	},
 }
+function getFilteredResultByConditions(conditions, source) {
+	const comparator = R.head(Object.keys(conditions));
+	const keyValue = R.head(Object.keys(conditions).map(comparator => conditions[comparator]));
+	return R.filter(getByComparator(comparator)(keyValue), source);
+}
 // String -> Function | Undefined
 function getByComparator(comparator) {
 	const ret = filterFuncs[comparator];
@@ -28,6 +33,8 @@ function getByComparator(comparator) {
 	return ret;
 }
 
+// there is one thing left:
+// inside the where method. I changed the global variable filtered making the function not pure.
 const wrapper  = {
 	select: function(cols) {
 		const _type = R.type(cols)
@@ -66,9 +73,7 @@ const wrapper  = {
 		return wrapper;
 	},
 	where: function(conditions) {
-		const comparator = R.head(Object.keys(conditions));
-		const keyValue = R.head(Object.keys(conditions).map(comparator => conditions[comparator]));
-		filtered = R.filter(getByComparator(comparator)(keyValue), all);
+		filtered = getFilteredResultByConditions(conditions, all);
 		return wrapper;
 	},
 	done: function() {
@@ -79,9 +84,7 @@ const wrapper  = {
 			console.error('please invoke the where method before doing that');
 			return;
 		}
-		const comparator = R.head(Object.keys(conditions));
-		const keyValue = R.head(Object.keys(conditions).map(comparator => conditions[comparator]));
-		filtered = R.filter(getByComparator(comparator)(keyValue), filtered);
+		filtered = getFilteredResultByConditions(conditions, filtered);
 		return wrapper;
 	},
 	or: function(conditions) {
@@ -89,10 +92,8 @@ const wrapper  = {
 			console.error('please invoke the where method before doing that');
 			return;
 		}
-		const comparator = R.head(Object.keys(conditions));
-		const keyValue = R.head(Object.keys(conditions).map(comparator => conditions[comparator]));
-		const union = R.filter(getByComparator(comparator)(keyValue), all);
-		filtered = R.union(filtered, union);
+		const or = getFilteredResultByConditions(conditions, all);
+		filtered = R.union(filtered, or);
 		return wrapper;
 	}
 }

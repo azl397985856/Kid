@@ -4,40 +4,40 @@ var _ = require('ramda');
 var assert = require("chai").assert
 
 var it1Data = [{
-  name: 'Aby',
-},{
-  name: 'caven',
-},{
-  name: 'carra',
-},{
-  name: 'karl',
-},{
-  name: 'karl',
+    name: 'Aby',
+  },{
+    name: 'caven',
+  },{
+    name: 'carra',
+  },{
+    name: 'karl',
+  },{
+    name: 'karl',
 }]
 var it2Data = [{
-  name: 'karl',
-},{
-  name: 'karl',
+    name: 'karl',
+  },{
+    name: 'karl',
 }] 
 var it3Data = [{
-  name: 'caven',
-  age: 18
-},{
-  name: 'carra',
-  age: 44
-}, {
-  name: 'karl',
-  age: 22
+    name: 'caven',
+    age: 18
+  },{
+    name: 'carra',
+    age: 44
+  }, {
+    name: 'karl',
+    age: 22
 }];
 var it4Data = [{
-  name: 'karl',
-  age: 22
-},{
-  name: 'karl',
-  age: 13
-},{
-  name: 'carra',
-  age: 44
+    name: 'karl',
+    age: 22
+  },{
+    name: 'karl',
+    age: 13
+  },{
+    name: 'carra',
+    age: 44
 }]
  
 describe("select test suite", function(){
