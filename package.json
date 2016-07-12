@@ -1,5 +1,5 @@
 {
-  "name": "crud",
+  "name": "Kid",
   "version": "0.1.0",
   "description": "A library which make it easier for you to manipulate array just like sql statement to table.",
   "main": "lib/index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/azl397985856/CRUD.git"
+    "url": "git+https://github.com/azl397985856/Kid.git"
   },
   "keywords": [
     "crud",
@@ -21,9 +21,9 @@
   "author": "zhipenglu",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/azl397985856/CRUD/issues"
+    "url": "https://github.com/azl397985856/Kid/issues"
   },
-  "homepage": "https://github.com/azl397985856/CRUD#readme",
+  "homepage": "https://github.com/azl397985856/Kid#readme",
   "dependencies": {
     "ramda": "^0.21.0"
   },
