@@ -32,7 +32,14 @@ var it3Data = [{
 var it4Data = [{
   name: 'karl',
   age: 22
-}] 
+},{
+  name: 'karl',
+  age: 13
+},{
+  name: 'carra',
+  age: 44
+}]
+ 
 describe("select test suite", function(){
   // basic usage
   it('select(...)from(...)', function(){
@@ -57,6 +64,12 @@ describe("select test suite", function(){
     }}).and({gt: {
       age: 30
     }}).done(), []);
+
+    assert.deepEqual(select(['name', 'age']).from(data).where({eq: {
+      name: 'karl'
+    }}).or({gt: {
+      age: 30
+    }}).done(), it4Data);
   });
 
   // // sortBy sortByDesc

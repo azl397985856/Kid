@@ -83,6 +83,17 @@ const wrapper  = {
 		const keyValue = R.head(Object.keys(conditions).map(comparator => conditions[comparator]));
 		filtered = R.filter(getByComparator(comparator)(keyValue), filtered);
 		return wrapper;
+	},
+	or: function(conditions) {
+		if (R.type(filtered) === 'Null') {
+			console.error('please invoke the where method before doing that');
+			return;
+		}
+		const comparator = R.head(Object.keys(conditions));
+		const keyValue = R.head(Object.keys(conditions).map(comparator => conditions[comparator]));
+		const union = R.filter(getByComparator(comparator)(keyValue), all);
+		filtered = R.union(filtered, union);
+		return wrapper;
 	}
 }
 module.exports = wrapper.select;
