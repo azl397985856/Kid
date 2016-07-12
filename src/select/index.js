@@ -5,18 +5,27 @@ let curry = null;
 let all = null;
 let filtered = null;
 
+// a -> Boolean
 const isString = R.is(String);
+// a -> Boolean
 const isArray = (type)=> R.type(type) === "Array";
+
 const filterFuncs = {
 	eq: R.whereEq,
 	gt: (keyValue) => {
 		const key = R.head(Object.keys(keyValue));
 		const value = keyValue[key];
-		R.gt(R.prop(key),value)
+		return (payload) => R.gt(R.prop(key, payload),value)
 	},
 }
+// String -> Function | Undefined
 function getByComparator(comparator) {
-	return filterFuncs[comparator];
+	const ret = filterFuncs[comparator];
+	if (R.isNil(ret)) {
+		console.error('sorry, the comparator' + comparator + ' is not the standard api we supplied');
+		return;
+	}
+	return ret;
 }
 
 const wrapper  = {
@@ -64,6 +73,16 @@ const wrapper  = {
 	},
 	done: function() {
 		return R.type(filtered) === 'Null' ? all : filtered;
+	},
+	and: function(conditions) {
+		if (R.type(filtered) === 'Null') {
+			console.error('please invoke the where method before doing that');
+			return;
+		}
+		const comparator = R.head(Object.keys(conditions));
+		const keyValue = R.head(Object.keys(conditions).map(comparator => conditions[comparator]));
+		filtered = R.filter(getByComparator(comparator)(keyValue), filtered);
+		return wrapper;
 	}
 }
 module.exports = wrapper.select;

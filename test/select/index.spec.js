@@ -21,12 +21,17 @@ var it2Data = [{
 }] 
 var it3Data = [{
   name: 'caven',
+  age: 18
 },{
   name: 'carra',
+  age: 44
 }, {
-  name: 'karl'
-}, {
-  name: 'karl'
+  name: 'karl',
+  age: 22
+}];
+var it4Data = [{
+  name: 'karl',
+  age: 22
 }] 
 describe("select test suite", function(){
   // basic usage
@@ -35,35 +40,38 @@ describe("select test suite", function(){
   });
 
   // filter result by the where clause
+  // attention: if you use where to reduce, be sure the column exist in the select method. Just like sql statement if yu famliar with that
   it('select(...)from(...)where(...)', function(){
     assert.deepEqual(select(['name']).from(data).where({eq: {
       name: 'karl'
     }}).done(), it2Data);
-    assert.deepEqual(select(['name']).from(data).where({gt: {
-      age: 12
+    assert.deepEqual(select(['name', 'age']).from(data).where({gt: {
+      age: 13
     }}).done(), it3Data);
   });   
 
   // further reduce according to mutiple conditions by adding 'and' and 'or' function 
   it('select(...)from(...)where(...)and(...)or(...)', function(){
-    assert.deepEqual(select(['name']).from(data).where({eq: {
+    assert.deepEqual(select(['name', 'age']).from(data).where({eq: {
       name: 'karl'
-    }}).done(), it3Data);
+    }}).and({gt: {
+      age: 30
+    }}).done(), []);
   });
 
-  // sortBy sortByDesc
-  it('select(...)from(...)where(...)sortBy()', function(){
-    assert.deepEqual(select(['name']).from(data).where({eq: {
-      name: 'karl'
-    }}).done(), it3Data);
-  });
-  
-  // take({pageNum:1, pageSize:2})
-  it('select(...)from(...)where(...)take({pageSize: 10, pageNum: 2})', function(){
-    assert.deepEqual(select(['name']).from(data).where({eq: {
-      name: 'karl'
-    }}).done(), it3Data);
-  });
+  // // sortBy sortByDesc
+  // it('select(...)from(...)where(...)sortBy()', function(){
+  //   assert.deepEqual(select(['name']).from(data).where({eq: {
+  //     name: 'karl'
+  //   }}).done(), it3Data);
+  // });
+
+  // // take({pageNum:1, pageSize:2})
+  // it('select(...)from(...)where(...)take({pageSize: 10, pageNum: 2})', function(){
+  //   assert.deepEqual(select(['name']).from(data).where({eq: {
+  //     name: 'karl'
+  //   }}).done(), it3Data);
+  // });
   
 
 });
