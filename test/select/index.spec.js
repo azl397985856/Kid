@@ -39,6 +39,15 @@ var it4Data = [{
     name: 'carra',
     age: 44
 }]
+var it5Data = [{
+    name: 'Aby',
+  },{
+    name: 'caven',
+  },{
+    name: 'carra',
+  }, {
+    name: 'karl'
+  }]
  
 describe("select test suite", function(){
   // basic usage
@@ -85,6 +94,9 @@ describe("select test suite", function(){
   //     name: 'karl'
   //   }}).done(), it3Data);
   // });
-  
+   // further reduce according to mutiple conditions by adding 'and' and 'or' function 
+  it('select(...)from(...).uniqAll(...)', function(){
+    assert.deepEqual(select(['name']).from(data).uniqAll().done(), it5Data);
+  });
 
 });

@@ -95,6 +95,17 @@ const wrapper  = {
 		const or = getFilteredResultByConditions(conditions, all);
 		filtered = R.union(filtered, or);
 		return wrapper;
+	},
+	uniqAll: function() {
+		if (R.type(all) === 'Null') {
+			console.error('please invoke the where method before doing that');
+			return;
+		}
+		filtered = R.uniq(all);
+		return wrapper;
+	},
+	uniqBy: function() {
+
 	}
 }
 module.exports = wrapper.select;
