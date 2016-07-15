@@ -5,7 +5,7 @@ A library which make it easier for you to manipulate array just like sql stateme
 ## Install
 
 ```bash
-npm install crud
+npm install Kid
 ```
 
 ## Usage example
