@@ -10,27 +10,9 @@ const isString = R.is(String);
 // a -> Boolean
 const isArray = (type)=> R.type(type) === "Array";
 
-const filterFuncs = {
-	eq: R.whereEq,
-	gt: (keyValue) => {
-		const key = R.head(Object.keys(keyValue));
-		const value = keyValue[key];
-		return (payload) => R.gt(R.prop(key, payload),value)
-	},
-}
-function getFilteredResultByConditions(conditions, source) {
-	const comparator = R.head(Object.keys(conditions));
-	const keyValue = R.head(Object.keys(conditions).map(comparator => conditions[comparator]));
-	return R.filter(getByComparator(comparator)(keyValue), source);
-}
-// String -> Function | Undefined
-function getByComparator(comparator) {
-	const ret = filterFuncs[comparator];
-	if (R.isNil(ret)) {
-		console.error('sorry, the comparator' + comparator + ' is not the standard api we supplied');
-		return;
-	}
-	return ret;
+function getFilteredResult(pred, source) {
+	return R.filter(pred, source);
+
 }
 
 // there is one thing left:
@@ -48,7 +30,7 @@ const wrapper  = {
 	from: function(table) {
 		const _type = R.type(table)
 		if (!table || isArray(_type)) {
-			console.error("cols must be Array, but got " + _type);
+			console.error("table must be Array, but got " + _type);
 			return -1;
 		}
 		if (R.type(curry) === "Null") {
@@ -72,27 +54,27 @@ const wrapper  = {
 		R.sortBy(R.compose(R.prop(sortCol)))(all);
 		return wrapper;
 	},
-	where: function(conditions) {
-		filtered = getFilteredResultByConditions(conditions, all);
+	where: function(pred) {
+		filtered = getFilteredResult(pred, all);
 		return wrapper;
 	},
 	done: function() {
 		return R.type(filtered) === 'Null' ? all : filtered;
 	},
-	and: function(conditions) {
+	and: function(pred) {
 		if (R.type(filtered) === 'Null') {
 			console.error('please invoke the where method before doing that');
 			return;
 		}
-		filtered = getFilteredResultByConditions(conditions, filtered);
+		filtered = getFilteredResult(pred, filtered);
 		return wrapper;
 	},
-	or: function(conditions) {
+	or: function(pred) {
 		if (R.type(filtered) === 'Null') {
 			console.error('please invoke the where method before doing that');
 			return;
 		}
-		const or = getFilteredResultByConditions(conditions, all);
+		const or = getFilteredResult(pred, all);
 		filtered = R.union(filtered, or);
 		return wrapper;
 	},

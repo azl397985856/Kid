@@ -58,27 +58,27 @@ describe("select test suite", function(){
   // filter result by the where clause
   // attention: if you use where to reduce, be sure the column exist in the select method. Just like sql statement if yu famliar with that
   it('select(...)from(...)where(...)', function(){
-    assert.deepEqual(select(['name']).from(data).where({eq: {
-      name: 'karl'
-    }}).done(), it2Data);
-    assert.deepEqual(select(['name', 'age']).from(data).where({gt: {
-      age: 13
-    }}).done(), it3Data);
+    assert.deepEqual(select(['name']).from(data).where(function(record) {
+      return record.name === 'karl';
+    }).done(), it2Data);
+    assert.deepEqual(select(['name', 'age']).from(data).where(function(record) {
+      return record.age > 13
+    }).done(), it3Data);
   });   
 
   // further reduce according to mutiple conditions by adding 'and' and 'or' function 
   it('select(...)from(...)where(...)and(...)or(...)', function(){
-    assert.deepEqual(select(['name', 'age']).from(data).where({eq: {
-      name: 'karl'
-    }}).and({gt: {
-      age: 30
-    }}).done(), []);
+    assert.deepEqual(select(['name', 'age']).from(data).where(function(record) {
+      return record.name === 'karl'
+    }).and(function(record) {
+      return record.age > 30
+    }).done(), []);
 
-    assert.deepEqual(select(['name', 'age']).from(data).where({eq: {
-      name: 'karl'
-    }}).or({gt: {
-      age: 30
-    }}).done(), it4Data);
+    assert.deepEqual(select(['name', 'age']).from(data).where(function(record) {
+      return record.name === 'karl'
+    }).or(function(record) {
+      return record.age > 30
+    }).done(), it4Data);
   });
 
   // // sortBy sortByDesc
