@@ -94,7 +94,7 @@ describe("select test suite", function(){
   //     name: 'karl'
   //   }}).done(), it3Data);
   // });
-   // further reduce according to mutiple conditions by adding 'and' and 'or' function 
+
   it('select(...)from(...).uniqAll(...)', function(){
     assert.deepEqual(select(['name']).from(data).uniqAll().done(), it5Data);
   });
