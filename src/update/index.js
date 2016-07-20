@@ -28,13 +28,15 @@ const wrapper  = {
 		return wrapper;
 	},
 	set: function(condition) {
-		all.map((row) = > {
-			Object.keys(condition).map((prop) => {
+		all = all.map((row) => {
+			var ret = Object.keys(condition).map((prop) => {
 				const propsLens = R.lensProp(prop);
-				R.set(propsLens, condition[prop], row)
+				return R.set(propsLens, condition[prop], row)
 			})
+			return R.head(ret);
 		});
-	}
+		return wrapper;
+	},
 	where: function(pred) {
 		filtered = getFilteredResult(pred, all);
 		return wrapper;
@@ -60,5 +62,5 @@ const wrapper  = {
 		return wrapper;
 	},
 }
-module.exports = wrapper.select;
-exports.default = wrapper.select;
+module.exports = wrapper.update;
+exports.default = wrapper.update;
