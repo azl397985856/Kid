@@ -7,7 +7,14 @@ A library which make it easier for you to manipulate array just like sql stateme
 ```bash
 npm install Kid
 ```
+## Test
 
+```bash
+git clone https://github.com/azl397985856/Kid.git
+cd Kid
+npm i
+npm run test
+```
 ## Usage example
 
 ```js
@@ -28,12 +35,6 @@ Returns the chain, so you can call the from at once; e.g: select(...).from(...)
 - `.update(table)`:
 Returns the chain, so you can call the set at once; e.g: update(...).set(...)
 
-- `.delete(table)`:
-Returns the chain, so you can call the where at once; e.g: delete(...).where(...)
-
-- `.insert(table)`:
-Returns the chain, so you can call the values at once; e.g: insert(...).values(...)
-
 - `.from(table)`:
 Returns the result
 
@@ -46,6 +47,8 @@ Return filtered Result
 - `.and(pred)`: take pred function in which returned boolean
 
 - `.or(pred)`: take pred function in which returned boolean
+
+- `.uniqAll(cols)`: uniqAll cols in the select statement
 
 ## Contributing
 
