@@ -54,6 +54,10 @@ describe("select test suite", function(){
   it('select(...)from(...)', function(){
     assert.deepEqual(select(['name']).from(data).done(), it1Data);
   });
+  // select *
+   it('select(*)from(...)', function(){
+    assert.deepEqual(select(['*']).from(data).done(), data);
+  });
 
   // filter result by the where clause
   // attention: if you use where to reduce, be sure the column exist in the select method. Just like sql statement if yu famliar with that

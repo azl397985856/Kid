@@ -24,7 +24,11 @@ const wrapper  = {
 			console.error("cols must be Array, but got " + _type);
 			return -1;
 		}
-		curry = R.project(cols);
+		if(cols[0] === '*') {
+			curry = '*';
+		} else {
+			curry = R.project(cols);
+		}
 		return wrapper;
 	},
 	from: function(table) {
@@ -37,7 +41,11 @@ const wrapper  = {
 			console.error("you must select first, then call the from method!");
 			return -1;
 		}
-		all = curry(table);
+		if (curry === '*') {
+			all = table;
+		} else {
+			all = curry(table);
+		}
 		return wrapper;
 	},
 	// only support string now
