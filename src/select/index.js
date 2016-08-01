@@ -94,8 +94,13 @@ const wrapper  = {
 		filtered = R.uniq(all);
 		return wrapper;
 	},
-	uniqBy: function() {
-
+	uniqBy: function(cols) {
+		if (R.type(all) === 'Null') {
+			console.error('please invoke the where method before doing that');
+			return;
+		}
+		filtered = R.uniqBy(x => R.props(cols, x), all);
+		return wrapper;
 	}
 }
 module.exports = wrapper.select;

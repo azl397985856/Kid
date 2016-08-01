@@ -48,6 +48,22 @@ var it5Data = [{
   }, {
     name: 'karl'
   }]
+  var it6Data = [{
+    name: 'Aby',
+    age: 12
+  },{
+    name: 'caven',
+    age: 18
+  },{
+    name: 'carra',
+    age: 44
+  },{
+    name: 'karl',
+    age: 22
+  },{
+    name: 'karl',
+    age: 13
+}]
  
 describe("select test suite", function(){
   // basic usage
@@ -101,6 +117,9 @@ describe("select test suite", function(){
 
   it('select(...)from(...).uniqAll(...)', function(){
     assert.deepEqual(select(['name']).from(data).uniqAll().done(), it5Data);
+  });
+  it('select(...)from(...).uniqBy(...)', function(){
+    assert.deepEqual(select(['*']).from(data).uniqBy(['age']).done(), it6Data);
   });
 
 });

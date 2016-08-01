@@ -1,6 +1,6 @@
 {
   "name": "Kid",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A library which make it easier for you to manipulate array just like sql statement to table.",
   "main": "lib/index.js",
   "scripts": {
