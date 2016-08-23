@@ -72,5 +72,5 @@
     "pre-commit": "1.x",
     "react-data-grid": "^1.0.20",
     "redbox-react": "^1.2.2"
-  },
+  }
 }
