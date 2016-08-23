@@ -121,5 +121,6 @@ describe("select test suite", function(){
   it('select(...)from(...).uniqBy(...)', function(){
     assert.deepEqual(select(['*']).from(data).uniqBy(['age']).done(), it6Data);
   });
-
+  // select([sum(num).as('num')]).from(...)groupBy(x,y);
+  // 
 });
